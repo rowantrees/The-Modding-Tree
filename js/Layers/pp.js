@@ -16,7 +16,7 @@ addLayer("pp", {
         return new Decimal(1)
     },
 
-    layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
+    layerShown() { return player.b.points.gte(1) ? true : "ghost" },          // Returns a bool for if this layer's node should be visible in the tree.
 
     upgrades: {
         // Look in the upgrades docs to see what goes here!
