@@ -8,14 +8,15 @@ addLayer("p", {
     }},
     color: "#4BDC13",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "prestige points", // Name of prestige currency
+    resource: "Prestige Points", // Name of prestige currency
     baseResource: "tests", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5, // Prestige currency exponent
+    exponent: 0.7, // Prestige currency exponent
     gainMult() {
         let mult = new Decimal(1)
         if (hasUpgrade('p', 13)) mult = mult.times(upgradeEffect('p', 13))
+        if (hasUpgrade('p', 21)) mult = mult.times(upgradeEffect('p', 21))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -35,7 +36,7 @@ addLayer("p", {
         },
         12: {
             title: "second",
-            description: "boost test gain",
+            description: "Prestige Points boost test gain",
             cost: new Decimal(2),
             effect() {
                 return player[this.layer].points.add(1).pow(0.5)
@@ -44,26 +45,34 @@ addLayer("p", {
         },
         13: {
             title: "third",
-            description: "boost point gain",
+            description: "Tests boost Prestige Point gain",
             cost: new Decimal(5),
             effect() {
                 return player.points.add(1).pow(0.15)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         },
+        21: {
+            title: "B",
+            description: "B points boost P points",
+            cost: new Decimal(50),
+            effect() {
+                return player.b.points.pow(0.15).add(1)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }
+        },
 
 
     },
     buyables: {
         31: {
-            cost(x) { return new Decimal(1).mul(x) },
-            display() { return "Blah" },
-            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            cost(x) {return 0},
+            display() {return "cheat"},
+            canAfford() {return true},
             buy() {
-                player[this.layer].points = player[this.layer].points.sub(this.cost())
-                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
-            },
-        },
+                player[this.layer].points = player[this.layer].points.add(10)
+            }
+        }
     },
     
 })
