@@ -42,7 +42,7 @@ addLayer("a", {
             onComplete() {console.log("Sailing the high Cs!")}
         },
         21: {
-            name: "B12",
+            name: "2B",
             done() {return player.b.points.gte(43)},
             goalTooltip: "2 be or not 2 be.",
             doneTooltip: "Reward: permanently multiply your test gain by 10.", // Showed when the achievement is completed
