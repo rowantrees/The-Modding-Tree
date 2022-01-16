@@ -27,7 +27,22 @@ addLayer("p", {
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
+    doReset(resettingLayer) {
+        if(['d','b','c'].includes(resettingLayer)) {
+            const testUpgradesToKeep = {
+                21: hasUpgrade("b", 11)
+            }
+            const upgradesToKeep = []
+            for (let upgrade of player[this.layer].upgrades) {
+                if (testUpgradesToKeep[upgrade]) {
+                    upgradesToKeep.push(upgrade)
+                }
+            }
+            layerDataReset(this.layer)
+            player[this.layer].upgrades = upgradesToKeep
 
+        }
+    },
     upgrades: {
         11: {
             title: "Doubler",
@@ -35,7 +50,7 @@ addLayer("p", {
             cost: new Decimal(1),
         },
         12: {
-            title: "second",
+            title: "PP boost",
             description: "Prestige Points boost test gain",
             cost: new Decimal(2),
             effect() {
@@ -72,6 +87,21 @@ addLayer("p", {
             buy() {
                 player[this.layer].points = player[this.layer].points.add(10)
             }
+        },
+        32: {
+            cost(x) {return 0},
+            display() {return "UNcheat"},
+            canAfford() {return true},
+            buy() {
+                player[this.layer].points = new Decimal(0)
+                player["b"].points = new Decimal(0)
+                player["c"].points = new Decimal(0)
+                player[this.layer].upgrades = []
+                player["b"].upgrades = []
+                player["c"].upgrades = []
+
+            }
+
         }
     },
     

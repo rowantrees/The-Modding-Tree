@@ -19,14 +19,42 @@ addLayer("b", {
 
     gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
         return new Decimal(1)               // Factor in any bonuses multiplying gain here.
+                                            // NOTE modifiers to gain actually reduce the amount of baseResource required, 
     },
     gainExp() {                             // Returns the exponent to your gain of the prestige resource.
         return new Decimal(1)
     },
         //if you have >= 1 b point OR >= 30 Prestige points it is visible.  Otherwise it's a ghost
-    layerShown() { return player.b.points.gte(1) ? true : player.p.points.gte(30) ? true : "ghost"},  // could be false instead of ghost, ghost makes it take up space whether it can be seen or not
+    layerShown() { return player.b.points.gte(1) || player.p.points.gte(30) ? true : "ghost"},  // could be false instead of ghost, ghost makes it take up space whether it can be seen or not
+
+
 
     upgrades: {
-        // Look in the upgrades docs to see what goes here!
+        11: {
+            title: "Keep upgrade \"B\"",
+            description: "Sick of buying it every prestige?",
+            cost: new Decimal(10),
+        },
     },
+    buyables: {
+        31: {
+            cost(x) {return 0},
+            display() {return "cheat"},
+            canAfford() {return true},
+            buy() {
+                player[this.layer].points = player[this.layer].points.add(10)
+            }
+        },
+        32: {
+            cost(x) {return 0},
+            display() {return "UNcheat (this node)"},
+            canAfford() {return true},
+            buy() {
+                player[this.layer].points = new Decimal(0)
+                player[this.layer].upgrades = []
+            }
+
+        }
+
+    }
 })

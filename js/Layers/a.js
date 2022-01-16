@@ -34,6 +34,20 @@ addLayer("a", {
             doneTooltip: "Reward: permanently double your test gain.", // Showed when the achievement is completed
             onComplete() {console.log("BBBBBBBBBBBBBB!")}
         },
+        14: {
+            name: "C",
+            done() {return player.c.points.gte(1)},
+            goalTooltip: "Sailing the high Cs.",
+            doneTooltip: "Reward: permanently double your test gain.", // Showed when the achievement is completed
+            onComplete() {console.log("Sailing the high Cs!")}
+        },
+        21: {
+            name: "B12",
+            done() {return player.b.points.gte(43)},
+            goalTooltip: "2 be or not 2 be.",
+            doneTooltip: "Reward: permanently multiply your test gain by 10.", // Showed when the achievement is completed
+            onComplete() {console.log("You've been hexed!")}
+        },
 
     },
 /*    midsection: ["grid", "blank"],
