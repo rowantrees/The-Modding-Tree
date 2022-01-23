@@ -3,7 +3,7 @@ var layoutInfo = {
     startNavTab: "tree-tab",
 	showTree: true,
 
-    treeLayout: ""
+    //treeLayout: [["b","c"]["p"]]
 
     
 }
@@ -21,3 +21,4 @@ addLayer("tree-tab", {
     previousTab: "",
     leftTab: true,
 })
+

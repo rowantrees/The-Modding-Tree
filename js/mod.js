@@ -1,8 +1,15 @@
+const BASEPOINTS = "numbers"
+const FIRSTPOINTS = "Prestige Points"
+const SECONDPOINTS = "Bubble Points"
+const THIRDPOINTS = "Cash Points"
+const FOURTHPOINTS = "Delta Points"
+
+
 let modInfo = {
 	name: "The Testy Tree",
 	id: "testymod",
 	author: "Rowan Trees",
-	pointsName: "tests",
+	pointsName: BASEPOINTS,
 	modFiles: ["tree.js", "Layers/p.js", "Layers/b.js", "Layers/a.js", "Layers/c.js", "Layers/d.js", "Layers/pp.js"],
 
 	discordName: "",
@@ -13,20 +20,21 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.1",
+	name: "First Version that works",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v0.1</h3><br>
+		- Got the game to the point where it is vaguely playable<br>
+		- Added all of the basic stuff to make it work.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
 var doNotCallTheseFunctionsEveryTick = ["blowUpEverything"]
+
 
 function getStartPoints(){
     return new Decimal(modInfo.initialStartPoints)
@@ -39,6 +47,7 @@ function canGenPoints(){
 
 // Calculate points/sec!
 function getPointGen() {
+	//showTab('none')
 	if(!canGenPoints())
 		return new Decimal(0)
 
@@ -48,6 +57,9 @@ function getPointGen() {
 	if (hasAchievement('a',21)) gain = gain.times(10)
 	if (hasUpgrade('p', 11)) gain = gain.times(2)
 	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p',12))
+	if (hasUpgrade('d', 11)) gain = gain.times(upgradeEffect('d',11))
+//	console.log(upgradeEffect('p',12))
+	if (inChallenge('d',11)) gain = gain.pow(0.2)
 	return gain
 }
 
@@ -61,7 +73,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return hasUpgrade('d',11)
+	return hasUpgrade('d',31)
 }
 
 

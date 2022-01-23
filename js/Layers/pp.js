@@ -6,7 +6,7 @@ addLayer("pp", {
     
 
     color: "pink",                       // The color for this layer, which affects many elements.
-    resource: "pp points",            // The name of this layer's main prestige resource.
+    resource: "NOT IMPLEMENTED YET",            // The name of this layer's main prestige resource.
     row: "side",                                 // The row this layer is on (0 is the first row).
 
     gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
