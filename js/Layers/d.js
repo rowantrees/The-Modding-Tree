@@ -75,7 +75,7 @@ addLayer("d", {
                 canComplete: function() {return player.p.points.gte(1000)},
                 unlocked: function() {return true},
                 completionLimit: 1,
-                rewardEffect: function() {return inChallenge('d',12) ? false : true},
+                rewardEffect: function() {return inChallenge('d',12) ? false : hasChallenge('d', 11)},
                 goalDescription: function() {return inChallenge(this.layer, this.id) ? this.canComplete() ? "Complete now!" : "Need " + new Decimal(1000).sub(player.p.points).ceil() + " more P points to complete" : "reach 1000 " + BASEPOINTS},
                 onExit: function() {showTab('p')},
                 onEnter: function() {showTab('p')},
